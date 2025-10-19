@@ -3,6 +3,8 @@ use String;
 use rocket::{data::{Data, FromData, Outcome}, request::Request, serde::json::Json};
 #[macro_use] extern crate rocket;
 
+mod lexer;
+
 #[derive(Serialize)]
 struct defaultResponse {
     message: String,
@@ -49,7 +51,9 @@ fn index<'r> () -> Json<defaultResponse> {
 #[post("/", data = "<data>")]
 fn create(data: Code) -> &'static str {
     let Code { code } = data;
-    code
+    let mut lexer = lexer::Lexer::new(code);
+    lexer.exec();
+    "done"
 }
 
 #[get("/b")]

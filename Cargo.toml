@@ -1,5 +1,5 @@
 [package]
-name = "rust-webapi"
+name = "rust-parser"
 version = "0.1.0"
 edition = "2024"
 
